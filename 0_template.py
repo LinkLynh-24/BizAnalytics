@@ -5,7 +5,9 @@
 #
 
 # 1. Input
-
+x = 8
+y = 7
 # 2. Process
-
+minus = x - y
 # 3. Output
+print(f"Minus is: {minus}")
