@@ -5,8 +5,9 @@
 #
 
 # 1. Input
-x = 8
-y = 7
+x = int(input("enter first number: "))
+y = int(input("enter second number: "))
+
 
 # 2. Process
 sum = x + y
