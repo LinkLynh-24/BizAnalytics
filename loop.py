@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 
-# Folder containing your 100 Excel files
 folder_path = r"C:\Users\User\Desktop\excels"
 
 # Loop through all Excel files in the folder
