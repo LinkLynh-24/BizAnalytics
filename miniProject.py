@@ -35,8 +35,16 @@ cheapestProduct = products[0]
 highestPrice = 0
 highestProduct = products[0]
 
+categoryCounter = {}
+def countCategories(cate):
+    if cate not in categoryCounter:
+        categoryCounter[cate] = 1
+    else:
+        categoryCounter[cate] += 1
+
 for pro in products:
     totalOriginal += pro["price"]
+    countCategories(pro["category"])
     if pro["category"] == "Electronics":
         if pro["price"] >= 1000:
             discountRate = 0.2
@@ -50,7 +58,7 @@ for pro in products:
         else:
             discountRate = 0.15
     elif pro["category"] == "Books":
-            discountRate = 0.1
+        discountRate = 0.1
 
     pro["newPrice"] = pro["price"] * (1-discountRate)
     pro["discountRate"] = int(discountRate * 100)
@@ -80,7 +88,7 @@ for pro in products:
 print(f"Average discount: {totalDiscount/countProduct}")
 print(f"Product with the highest discount: {highestDiscountedProduct["name"]}, with ${highestDiscount}")
 
-
+print(categoryCounter)
 
 
 
