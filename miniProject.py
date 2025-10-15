@@ -9,27 +9,76 @@ products = [
 {"name": "Headphones", "price": 150, "category": "Electronics"}
 ]
 
-def formatPrinter(product):
-    print(f"Category: {product["category"]} \nOriginal Price: $1200.0 \nDiscount: 20% \nFinal Price: ${product["price"]}", end="\n")
-    print("===")
+# display product info
+print("=== PRODUCT DISCOUNT CALCULATOR ===")
+def printer(product):
+    print(
+    f"Product: {product['name']}\n"
+    f"  Category: {product['category']}\n"
+    f"  Original Price: ${product['price']}\n"
+    f"  Discount: {product['discountRate']}%\n"
+    f"  Final Price: ${product['newPrice']}\n"
+    )
 
 # process
+totalOriginal = 0
+totalDiscount = 0.0
+discountRate = 0.0
+newPrice = 0.0
+countProduct = 0
+
+# bonus
+highestDiscount = 0.0
+highestDiscountedProduct = products[0]
+cheapestPrice = 0
+cheapestProduct = products[0]
+highestPrice = 0
+highestProduct = products[0]
+
 for pro in products:
+    totalOriginal += pro["price"]
     if pro["category"] == "Electronics":
         if pro["price"] >= 1000:
-            pro["price"] = pro["price"] * 0.8
+            discountRate = 0.2
         elif 500 <= pro["price"] < 1000:
-            pro["price"] = pro["price"] * 0.85
-        elif pro["price"] < 500:
-            pro["price"] = pro["price"] * 0.9
+            discountRate = 0.15
+        else:
+            discountRate = 0.1
     elif pro["category"] == "Clothing":
         if pro["price"] >= 100:
-            pro["price"] = pro["price"] * 0.75
+            discountRate = 0.25
         else:
-            pro["price"] = pro["price"] * 0.85
+            discountRate = 0.15
+    elif pro["category"] == "Books":
+            discountRate = 0.1
 
-    # formatPrinter(pro)
+    pro["newPrice"] = pro["price"] * (1-discountRate)
+    pro["discountRate"] = int(discountRate * 100)
 
+    discount = pro["price"] * discountRate
+    countProduct += 1
+    totalDiscount += discount
+
+    # bonus
+    if(highestDiscount < discount):
+        highestDiscount = discount
+        highestDiscountedProduct = pro
+
+    # printer(pro)
+
+# display summary
+# print("=== SUMMARY ===")
+# print(
+#     f"Total products: {countProduct}\n"
+#     f"Total original price: ${totalOriginal}\n"
+#     f"Total discount: ${totalDiscount}\n"
+#     f"Total final price: ${totalOriginal - totalDiscount}"
+#     )
+
+
+# bonus
+print(f"Average discount: {totalDiscount/countProduct}")
+print(f"Product with the highest discount: {highestDiscountedProduct["name"]}, with ${highestDiscount}")
 
 
 
