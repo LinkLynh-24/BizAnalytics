@@ -30,7 +30,7 @@ countProduct = 0
 # bonus
 highestDiscount = 0.0
 highestDiscountedProduct = products[0]
-cheapestPrice = 0
+cheapestPrice = products[0]["price"]
 cheapestProduct = products[0]
 highestPrice = 0
 highestProduct = products[0]
@@ -44,7 +44,7 @@ def countCategories(cate):
 
 for pro in products:
     totalOriginal += pro["price"]
-    countCategories(pro["category"])
+    countCategories(pro["category"]) # bonus
     if pro["category"] == "Electronics":
         if pro["price"] >= 1000:
             discountRate = 0.2
@@ -72,24 +72,34 @@ for pro in products:
         highestDiscount = discount
         highestDiscountedProduct = pro
 
-    # printer(pro)
+    if(cheapestPrice > pro["newPrice"]):
+        cheapestPrice = pro["newPrice"]
+        cheapestProduct = pro
+
+    if(highestPrice < pro["newPrice"]):
+        highestPrice = pro["newPrice"]
+        highestProduct = pro
+
+    printer(pro)
 
 # display summary
-# print("=== SUMMARY ===")
-# print(
-#     f"Total products: {countProduct}\n"
-#     f"Total original price: ${totalOriginal}\n"
-#     f"Total discount: ${totalDiscount}\n"
-#     f"Total final price: ${totalOriginal - totalDiscount}"
-#     )
-
+print("=== SUMMARY ===")
+print(
+    f"Total products: {countProduct}\n"
+    f"Total original price: ${totalOriginal}\n"
+    f"Total discount: ${totalDiscount}\n"
+    f"Total final price: ${totalOriginal - totalDiscount}"
+    )
 
 # bonus
+print("=========")
 print(f"Average discount: {totalDiscount/countProduct}")
 print(f"Product with the highest discount: {highestDiscountedProduct["name"]}, with ${highestDiscount}")
-
-print(categoryCounter)
-
+print(f"Product with the highest price after discount: {highestProduct["name"]}, at ${highestProduct["newPrice"]}")
+print(f"Product with the lowest price after discount: {cheapestProduct["name"]}, at ${cheapestProduct["newPrice"]}")
+print("=========")
+for c in categoryCounter:
+    print(f"Category: {c}, number of products: {categoryCounter[c]}")
 
 
 
